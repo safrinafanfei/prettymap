@@ -1,104 +1,4 @@
-<!doctype html>
-<html>
-  <head>
-    <style>
-    #trauma_dot{
-  position: fixed;
-  top:-450px;
-  left:-142px;
-}
-      #landline_container {
-        width:95%;
-        max-width:600px;
-      }
-      #landline_tooltip {
-        position:absolute;
-        background:rgba(222, 222, 222, 0.95);
-        z-index:999999;
-        font-family: Helvetica, Arial, sans-serif;
-        font-weight:bold;
-        font-size:12px;
-        padding:5px;
-        border-radius:2px;
-        box-shadow:0 0 5px #444;
-        display:none;
-      }
-      #landline_tooltip h2 {
-        margin:0;
-        padding:0;
-        font-size:14px;
-      }
-      .tooltip_sub {
-        font-size:12px;
-        font-weight:normal;
-        display:inline-block;
-        line-height:14px;
-      }
-
-      #base_map{
-        background-image:url("out.png"); 
-        float:left;
-        position:fixed;
-        top:-62px;
-
-        path:hover {
-  fill-opacity: .7;
-}
-/* Style for Custom Tooltip */
-div.tooltip {   
-  position: absolute;           
-  text-align: center;           
-  width: 60px;                  
-  height: 28px;                 
-  padding: 2px;             
-  font: 12px sans-serif;        
-  background: white;   
-  border: 0px;      
-  border-radius: 8px;           
-  pointer-events: none;         
-}
-        
-/* Legend Font Style */
-body {
-  font: 11px sans-serif;
-}
-        
-/* Legend Position Style */
-.legend {
-  position:absolute;
-  left:800px;
-  top:350px;
-}
-      }
-    </style>
-    <!-- Bring your own copy of jQuery/Underscore/Raphael here -->
-    <!-- To support IE < 9, include jQuery 1.x -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-    <!-- Load the NYC boroughs package and options -->
-    <script src="public/javascripts/nyc/boroughs_packaged_ok.js"></script>
-    <script src="public/javascripts/nyc/boroughs_options.js"></script>
-
-    <!-- Load Landline and Stateline -->
-    <script src="public/javascripts/landline.js"></script>
-    <script src="public/javascripts/landline.stateline.js"></script>
-    
-    <!-- Create a tooltip container -->
-    <script type="text/jst" id="landline_tooltip_tmpl">
-      <h2><%= n %></h2>
-      <span class="tooltip_sub">
-        Median income<br>
-        $<%= med_income %>
-        <span class='tooltip_moe'><br>&plusmn; $<%= moe %></span>
-      </span>
-    </script>
-
-    <!-- Census median income data, via http://censusreporter.org/data/map/?table=B06011&geo_ids=040|01000US -->
-    <!-- Completely dummy data below -->
-    <script>
-      var census =  {
+var census =  {
   "40001": [ "Adair", 22.004],
   "40003": [ "Alfalfa", 5.868],
   "40005": [ "Atoka", 13.793],
@@ -178,16 +78,8 @@ body {
   "40153": [ "Woodward", 21.559]
 
 }
-    </script>
-  </head>
-  <body>
-    <img id="base_map" src="out.png" alt="Mountain View" style="width:600px;">
-    <div id="landline_container"></div>
 
-    <div id="trauma_dot"></div>
-
-    <script>
-      $(function() {
+$(function() {
 
         // Initialize the map
         var map = new Landline.Stateline("#landline_container", "counties", options);
@@ -241,12 +133,12 @@ body {
 
 
         //draw dots
-        var width = 1200;
-var height = 1000;
+        var width = 2400;
+var height = 2000;
 // D3 Projection
-var projection = d3.geo.mercator()
+var projection = d3.geo.albers()
            .translate([width/2, height/2])    // translate to center of screen
-           .scale([5000]);          // scale things down so see entire US
+           .scale(10000);          // scale things down so see entire US
         
 // Define path generator
 var path = d3.geo.path()               // path generator that will convert GeoJSON to SVG paths
@@ -254,7 +146,7 @@ var path = d3.geo.path()               // path generator that will convert GeoJS
     
 // Define linear scale for output
 var color = d3.scale.linear()
-        .range(['rgba(0,0,0,0)','rgba(0,0,0,0)']);
+        .range(['rgba(0,0,34,0)','rgba(0,0,34,0)']);
 // var legendText = ["Cities Lived", "States Lived", "States Visited", "Nada"];
 //Create SVG element and append map to the SVG
 var svg = d3.select("#trauma_dot")
@@ -268,10 +160,10 @@ var div = d3.select("body")
         .attr("class", "tooltip")               
         .style("opacity", 0);
 // Load in my states data!
-d3.csv("2014state_fatalinjury.csv", function(data) {
+d3.csv("data/2014state_fatalinjury.csv", function(data) {
 color.domain([40,60,80,110]); // setting the range of the input data
 // Load GeoJSON data and merge with states data
-d3.json("us-states.json", function(json) {
+d3.json("data/us-states.json", function(json) {
 // Loop through each state data value in the .csv file
 for (var i = 0; i < data.length; i++) {
   // Grab State Name
@@ -310,8 +202,7 @@ svg.selectAll("path")
   }
 });
      
-// Map the cities I have lived in!
-d3.csv("traumacenterlist_ok.csv", function(data) {
+d3.csv("data/traumacenterlist_ok.csv", function(data) {
 svg.selectAll("circle")
   .data(data)
   .enter()
@@ -372,10 +263,3 @@ var legend = d3.select("body").append("svg")
 });
       });
 
-
-
-    </script>
-
-    <div id="landline_tooltip"></div>
-  </body>
-</html>

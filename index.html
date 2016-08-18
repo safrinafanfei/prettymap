@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+    <style>  
+    </style>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <!-- Bring your own copy of jQuery/Underscore/Raphael here -->
+    <!-- To support IE < 9, include jQuery 1.x -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <!-- Load the NYC boroughs package and options -->
+    <script src="data/boroughs_packaged_ok.js"></script>
+    <script src="data/boroughs_options.js"></script>
+    <script src="js/landlinejs.js"></script>
+
+    <!-- Load Landline and Stateline -->
+    <script src="js/landline.js"></script>
+    <script src="js/landline.stateline.js"></script>
+    
+    <!-- Create a tooltip container -->
+    <script type="text/jst" id="landline_tooltip_tmpl">
+      <h2><%= n %></h2>
+      <span class="tooltip_sub">
+        Median income<br>
+        $<%= med_income %>
+        <span class='tooltip_moe'><br>&plusmn; $<%= moe %></span>
+      </span>
+    </script>
+
+    <!-- Census median income data, via http://censusreporter.org/data/map/?table=B06011&geo_ids=040|01000US -->
+    <!-- Completely dummy data below -->
+    <script>
+
+    </script>
+  </head>
+  <body>
+    <div id="map">
+      <div id= "toggle-container">
+        <button class="toggle" id="level1">Level I</button>
+        <button class="toggle" id="level2">Level II</button>
+        <button class="toggle" id="level3">Lower Levels</button>
+      </div>
+      <img id="base_map" src="out.png" alt="basemap" style="width:1200px;">
+      <div id="landline_container"></div>
+      <div id="trauma_dot"></div>
+    </div>
+    <div id="screen">
+      <div id="hed">More is not better, <br> But fewer is not the best</div>
+      <div class="guff"> A recent Pitt study finds that an influx of trauma centers could hurt patient care, not help. But some states still have limited number of higher-level trauma centers and residents don't have enough access to these facilities.  </div>
+    </div>
+
+    <div id="landline_tooltip"></div>
+  </body>
+</html>
