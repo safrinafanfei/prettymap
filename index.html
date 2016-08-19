@@ -14,11 +14,15 @@
     <script src="data/boroughs_packaged_ok.js"></script>
     <script src="data/boroughs_options.js"></script>
     <script src="js/landlinejs.js"></script>
-
+    <script src="js/statemap.js"></script>
+    <script src="js/simple_statistics.js"></script>
     <!-- Load Landline and Stateline -->
     <script src="js/landline.js"></script>
     <script src="js/landline.stateline.js"></script>
-    
+    <script src="js/noframework.waypoints.min.js"></script>
+    <script src="http://d3js.org/queue.v1.min.js"></script>
+    <script src="http://d3js.org/topojson.v0.min.js"></script>
+
     <!-- Create a tooltip container -->
     <script type="text/jst" id="landline_tooltip_tmpl">
       <h2><%= n %></h2>
@@ -36,19 +40,33 @@
     </script>
   </head>
   <body>
-    <div id="map">
+    <div id="graphics">
+<!--       <img id="state_base_map" src="state_out.png" alt="basemap" style="width:1200px;">
+ -->      <div id="state_map"></div>
       <div id= "toggle-container">
         <button class="toggle" id="level1">Level I</button>
         <button class="toggle" id="level2">Level II</button>
         <button class="toggle" id="level3">Lower Levels</button>
       </div>
       <img id="base_map" src="out.png" alt="basemap" style="width:1200px;">
-      <div id="landline_container"></div>
+      <div id="landline_container"> <hr id="yourplace" class="anno"><div>If you live here, it will take you around 2.5 hours to get to the nearest Trauma Center.</div></div>
       <div id="trauma_dot"></div>
     </div>
     <div id="screen">
       <div id="hed">More is not better, <br> But fewer is not the best</div>
       <div class="guff"> A recent Pitt study finds that an influx of trauma centers could hurt patient care, not help. But some states still have limited number of higher-level trauma centers and residents don't have enough access to these facilities.  </div>
+      <div class="guff" id = "intro_guff">Most big cities are well covered but rural areas are not. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+      <div class="guff" id = "second_guff">Most big cities are well covered but rural areas are not. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
     </div>
 
     <div id="landline_tooltip"></div>

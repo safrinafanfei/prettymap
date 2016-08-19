@@ -1,4 +1,14 @@
-#screen{
+/*text & guff
+
+*/    
+
+      hr #yourplace {
+        transform: rotate(-45deg);
+        width: 70%;
+      }
+
+      
+      #screen{
         background-color: #fff;
         position: fixed;
         right: 0%;
@@ -7,6 +17,7 @@
         box-shadow: 0em 2em 15em #fff;
         width: 31%;
         z-index: 999999;
+        overflow: scroll;
       }
 
       #hed{
@@ -25,6 +36,80 @@
         top:20px;
         padding-right: 10%;
       }
+
+
+      #intro_guff{
+        position: absolute;
+        padding-top: 300%;
+        left:10%;
+        padding-right: 10%;
+      }
+
+      #second_guff{
+        position: absolute;
+        padding-top: 450%;
+        left:10%;
+        padding-right: 10%;
+      }
+
+/*  state_map
+*/
+      #state_map{
+        position: fixed;
+        top:500px;
+        left: 10.5%;
+        z-index: 10000;
+        opacity: 0.5;
+      }
+
+      #state_base_map{
+        position: fixed;
+        top:500px;
+        left: 10.5%;
+        z-index: 10000;
+      }
+
+
+
+
+
+
+      body {
+        font:normal 14px sans-serif;
+      }
+
+      #form {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+      }
+
+      input {
+        margin-right: 10px;
+      }
+
+      .states {
+        fill: none;
+        stroke: #fff;
+        stroke-linejoin: round;
+      }
+
+      path {
+        -webkit-transition: fill 200ms linear;
+      }
+
+      .q0-9 { fill:rgb(247,251,255); }
+      .q1-9 { fill:rgb(222,235,247); }
+      .q2-9 { fill:rgb(198,219,239); }
+      .q3-9 { fill:rgb(158,202,225); }
+      .q4-9 { fill:rgb(107,174,214); }
+      .q5-9 { fill:rgb(66,146,198); }
+      .q6-9 { fill:rgb(33,113,181); }
+      .q7-9 { fill:rgb(8,81,156); }
+      .q8-9 { fill:rgb(8,48,107); }
+
+/*END OF STATEMAP  */
+
 
       #toggle-container {
         top: 5em;
@@ -103,6 +188,12 @@
         path:hover {
         fill-opacity: .7;
       }
+
+
+
+      
+
+
       /* Style for Custom Tooltip */
       div.tooltip {   
         position: absolute;           
